@@ -62,7 +62,7 @@ def main(args):
                 model.prep_rollout('cpu')
         if replay_buffer.get_success_rate() > config['upgrade_threshold']:
             env.upgrade()
-        logger.add_scalar('data/scalar1', replay_buffer.get_average_reward(), ep_i)
+        logger.add_scalar('data/reward', replay_buffer.get_average_reward(), ep_i)
         if ep_i % config['save_interval'] < config['num_rollout_threads']:
             model.prep_rollout('cpu')            
             model.save(os.path.join(log_dir, f"model_ep{ep_i + 1}"))
